@@ -1,6 +1,6 @@
-function Error(){
+/*function Error(){
     return(
         <h2>Error</h2>
     )
 }
-export default Error
+export default Error*/
