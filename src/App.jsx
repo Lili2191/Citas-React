@@ -4,14 +4,24 @@
 import Header from "./componentes/header"
 import ListadoPaciente from "./componentes/listadoPaciente"
 import Formulario from "./componentes/formulario"
-//los estilos se meten con classname en los elementos
+import {useState} from "react"
+//los estilos se meten con classname en los archivos .jsx
 function App() {
+  const[pacientes,setPacientes]=useState([])
+  const[paciente,setPaciente]=useState({})
   return(
-    <div className="mt-20">
+  <div className="mt-20 container mx-auto">
     <Header/>
-    <Formulario/>
+    <div className="md:flex mt-12">
+    <Formulario
+    pacientes={pacientes}
+    setPacientes={setPacientes}
+    paciente={paciente}
+    setPaciente={setPaciente}
+    />
     <ListadoPaciente/>
     </div>
+  </div>
   )
 }
 

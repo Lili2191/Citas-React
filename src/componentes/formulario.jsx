@@ -1,12 +1,17 @@
 import{useState, useEffect} from 'react';
 import Error from './error';
-function Formulario(){
+function Formulario({pacientes,setPacientes,paciente,setPaciente}){
   const[mascota, setMascota]=useState('');
   const[propietario, setPropietario]=useState('');
   const[email, setEmail]=useState('');
   const[sintomas, setSintomas]=useState('');
   const[alta, setAlta]=useState('');
   const[error,setError]=useState(false)
+  const generarId=()=>{
+    const random= Math.random().toString(36)
+    const fecha=Date.now().toString(36)
+    return random+fecha
+  }
   const validarFormulario=(e)=>{
     e.preventDefault()
     if([mascota,propietario,email,sintomas,alta].includes('')){console.log('Hay al menos un campo vacio')
@@ -14,6 +19,14 @@ function Formulario(){
     return
    };
    setError(false)
+   const objPaciente={mascota,propietario,email,sintomas,alta}
+   if(paciente.id){
+
+   }else{
+    objPaciente.id=generarId()
+    setPacientes([...pacientes,objPaciente])
+   }
+   
    //---------Limpiando nuestros input
    setMascota('')
    setPropietario('')
@@ -52,26 +65,27 @@ function Formulario(){
 
                 <label className="block text-gray-700 uppercase font-bold">Email</label>
                 <input className="p-2 rounded-md w-full mt-2 placeholder-gray-500"
-                type="text"
+                type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e)=>setEmail(e.target.value)}/>
 
                 <label className="block text-gray-700 uppercase font-bold">Síntomas</label>
-                <input className="p-2 rounded-md w-full mt-2 placeholder-gray-500"
+                <textarea className="p-2 rounded-md w-full mt-2 placeholder-gray-500"
                 type="text"
                 placeholder="Síntomas"
                 value={sintomas}
                 onChange={(e)=>setSintomas(e.target.value)}/>
                 <label className="block text-gray-700 uppercase font-bold">Alta</label>
                 <input className="p-2 rounded-md w-full mt-2 placeholder-gray-500"
-                type="text"
+                type="date"
                 placeholder="Alta"
                 value={alta}
                 onChange={(e)=>setAlta(e.target.value)}/>
             </div>
             </div>
-            <input type="submit" className=" bg-indigo-500 text-white uppercase w-full p-3 mt-5 rounded-md hover:bg-indigo-700 cursor-pointer transition-colors font-bold" />
+            <input type="submit" className=" bg-indigo-500 text-white uppercase w-full p-3 mt-5 rounded-md hover:bg-indigo-700 cursor-pointer transition-colors font-bold" 
+            value={'Agregar paciente'} />
           </form>
         </div>
     );
