@@ -39,7 +39,9 @@ function Formulario({pacientes,setPacientes,paciente,setPaciente}){
         <div className="md:w-1/2 mx-5 lg:w-2/5">
           <h2 className="text-center font-black text-3xl mb-5">Seguimiento Pacientes</h2>
           <p className="text-center mt-5 text-lg mb-10">Añade pacientes {" "}<span className="text-indigo-600 font-bold">Administrarlos</span></p>
-          <form className="bg-slate-300 py-10 px-8 shadow-md rounded-lg" onSubmit={validarFormulario}>
+
+          <form className="bg-slate-300 py-10 px-8 shadow-md rounded-lg" 
+          onSubmit={validarFormulario}>
             <div>
               {
                 error&&<Error>
@@ -52,7 +54,8 @@ function Formulario({pacientes,setPacientes,paciente,setPaciente}){
                 type="text"
                 placeholder="Nombre de la Mascota" 
                 value={mascota}
-                onChange={(e)=>setMascota(e.target.value)}/>
+                onChange={(e)=>setMascota(e.target.value)}
+                />
               </div>  
 
                 <div>
