@@ -1,6 +1,6 @@
 import Paciente from "./pacientes";
 
-function ListadoPaciente(pacientes,setPaciente){
+function ListadoPaciente({pacientes,setPaciente}){
 
     return(
         <div className="md:w-1/2 lg:w-3/5 overflow-y-scroll md:h-screen box-sizzing:border-box">
