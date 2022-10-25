@@ -7,6 +7,19 @@ function Formulario({pacientes,setPacientes,paciente,setPaciente}){
   const[sintomas, setSintomas]=useState('');
   const[alta, setAlta]=useState('');
   const[error,setError]=useState(false)
+
+useEffect(()=>{
+  if(Object.keys(paciente).length>0){
+    setMascota(paciente.mascota)
+    setPropietario(paciente.propietario)
+    setEmail(paciente.email)
+    setSintomas(paciente.sintomas)
+    setAlta(paciente.alta)
+  }
+},[paciente])
+
+
+
   const generarId=()=>{
     const random= Math.random().toString(36)
     const fecha=Date.now().toString(36)
@@ -19,12 +32,18 @@ function Formulario({pacientes,setPacientes,paciente,setPaciente}){
     return
    };
    setError(false)
-   const objPaciente={mascota,propietario,email,sintomas,alta}
+   const objPaciente={mascota,propietario,email,sintomas,alta,}
    if(paciente.id){
+    objPaciente.id=paciente.id
+    const pacientesAct=pacientes.map(pacienteState => pacienteState.id===paciente.id ? 
+      objPaciente:pacienteState)
+      setPacientes(pacientesAct)
+      setPaciente({})
 
    }else{
     objPaciente.id=generarId()
     setPacientes([...pacientes,objPaciente])
+    
    }
    
    //---------Limpiando nuestros input
@@ -38,7 +57,7 @@ function Formulario({pacientes,setPacientes,paciente,setPaciente}){
     return(
         <div className="md:w-1/2 mx-5 lg:w-2/5">
           <h2 className="text-center font-black text-3xl mb-5">Seguimiento Pacientes</h2>
-          <p className="text-center mt-5 text-lg mb-10">Añade pacientes {" "}<span className="text-indigo-600 font-bold">Administrarlos</span></p>
+          <p className="text-center mt-5 text-lg mb-10">Añade pacientes {" "}<span className="text-indigo-600 font-bold"> para Administrarlos</span></p>
 
           <form className="bg-slate-300 py-10 px-8 shadow-md rounded-lg" 
           onSubmit={validarFormulario}>
@@ -88,7 +107,7 @@ function Formulario({pacientes,setPacientes,paciente,setPaciente}){
             </div>
             </div>
             <input type="submit" className=" bg-indigo-500 text-white uppercase w-full p-3 mt-5 rounded-md hover:bg-indigo-700 cursor-pointer transition-colors font-bold" 
-            value={'Agregar paciente'} />
+            value={paciente.id?'editar paciente':'Agregar paciente'} />
           </form>
         </div>
     );

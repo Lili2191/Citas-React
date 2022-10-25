@@ -4,13 +4,29 @@
 import Header from "./componentes/header"
 import ListadoPaciente from "./componentes/listadoPaciente"
 import Formulario from "./componentes/formulario"
-import {useState} from "react"
+import {useState,useEffect} from "react"
+
 //los estilos se meten con classname en los archivos .jsx
 function App() {
   const[pacientes,setPacientes]=useState([])
   const[paciente,setPaciente]=useState({})
   const eliminarPaciente=id=>{const pacientesAct=pacientes.filter(paciente=>paciente.id!==id)
   setPacientes(pacientesAct)}
+
+  useEffect(()=>{
+    const obtenerLs=(()=>{
+      const pacientesLs=JSON.parse(localStorage.getItem('pacientes'))??[]
+      setPacientes(pacientesLs)
+    })
+    obtenerLs();
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem('pacientes',JSON.stringify(pacientes))
+  },[pacientes])
+
+  
+
   return(
   <div className="mt-20 container mx-auto">
     <Header

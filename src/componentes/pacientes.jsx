@@ -1,10 +1,11 @@
 function Paciente({paciente,eliminarPaciente,setPaciente}){
-    const{mascota,propietario,email,sintomas,alta}=paciente
+    const{mascota,propietario,email,sintomas,alta,id}=paciente
     const eliminarFormulario=()=>{const respuesta=confirm
         ('¿Seguro qu desea elimar el paciente?')
     if(respuesta){
         eliminarPaciente(id)
-    } }
+    } 
+  }
     return(
         <div className="bg-slate-300 shadow-md px-5 mx-5 rounded-md">
             <p className="font-bold text-gray-700 uppercase">Mascota:<span className="font-normal normal-case">{mascota}</span></p>
